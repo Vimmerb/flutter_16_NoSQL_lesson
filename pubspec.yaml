@@ -37,6 +37,9 @@ dependencies:
   objectbox: ^2.0.0
   objectbox_flutter_libs: ^2.0.0
   objectbox_generator: ^2.0.0
+  mobx: 2.2.0
+  flutter_mobx: 2.0.6+5
+  mobx_codegen: 2.3.0
 
 dev_dependencies:
   flutter_test:

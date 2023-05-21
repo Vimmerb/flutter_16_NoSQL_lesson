@@ -1,5 +1,5 @@
 import 'package:flutter_16/model/note.dart';
-import 'package:flutter_16/objectbox.g.dart';
+import 'package:flutter_16/generated/objectbox.g.dart';
 
 class NotesRepository {
   late final Store _store;

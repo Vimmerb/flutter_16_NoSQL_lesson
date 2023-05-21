@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_16/model/note.dart';
-import 'package:flutter_16/services/notes_repository.dart';
+import 'package:flutter_16/utils/dialog_upd_utils.dart';
+import 'package:flutter_16/viewmodel/home_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_16/utils/dialog_add_utils.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({Key? key}) : super(key: key);
@@ -10,15 +12,15 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  late final _notesRepo = NotesRepository();
-  var _notes = <Note>[];
+  // late final _notesRepo = NotesRepository();
+  // var _notes = <Note>[];
+  final HomeStore viewModel = HomeStore();
 
   @override
   void initState() {
     super.initState();
-    _notesRepo
-        .initDB()
-        .whenComplete(() => setState(() => _notes = _notesRepo.notes));
+    //_notesRepo.initDB().whenComplete(() => setState(() => _notes = _notesRepo.notes));
+    viewModel.fetchData();
   }
 
   @override
@@ -27,123 +29,43 @@ class _NotesPageState extends State<NotesPage> {
       appBar: AppBar(
         title: const Text('Notes'),
       ),
-      body: ListView.builder(
-        itemCount: _notes.length,
-        itemBuilder: (_, index) => ListTile(
-          title: Text(
-            _notes[index].name,
-          ),
-          subtitle: Text(
-            _notes[index].description,
-          ),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () async => _showDialogUpdate(_notes[index]),
+      body: Observer(
+        builder: (_) {
+          final notes = viewModel.notes;
+          return ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (_, index) => ListTile(
+              title: Text(
+                notes[index].name,
               ),
-              IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () async {
-                  await _notesRepo.deleteNote(_notes[index].id);
-                  setState(() {
-                    _notes = _notesRepo.notes;
-                  });
-                },
+              subtitle: Text(
+                notes[index].description,
               ),
-            ],
-          ),
-        ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () async =>
+                        showDialogUpdate(context, notes[index], viewModel),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    // удаление заметки
+                    onPressed: () async {
+                      await viewModel.deleteNote(notes[index].id);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => _showDialog(),
+        onPressed: () => showDialogAdd(context, viewModel),
       ),
     );
   }
-
-  Future _showDialogUpdate(Note note) => showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        pageBuilder: (_, __, ___) {
-          final nameController = TextEditingController(text: note.name);
-          final descController = TextEditingController(text: note.description);
-          return AlertDialog(
-            title: const Text('Edit note'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(hintText: 'Name'),
-                ),
-                TextField(
-                  controller: descController,
-                  decoration: const InputDecoration(hintText: 'Description'),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  final updatedNote = Note(
-                    id: note.id,
-                    name: nameController.text,
-                    description: descController.text,
-                  );
-                  await _notesRepo.updateNote(note.id, updatedNote);
-                  setState(() {
-                    _notes = _notesRepo.notes;
-                    Navigator.pop(context);
-                  });
-                },
-                child: const Text('Save'),
-              )
-            ],
-          );
-        },
-      );
-
-  Future _showDialog() => showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        pageBuilder: (_, __, ___) {
-          final nameController = TextEditingController();
-          final descController = TextEditingController();
-          return AlertDialog(
-            title: const Text('New note'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(hintText: 'Name'),
-                ),
-                TextField(
-                  controller: descController,
-                  decoration: const InputDecoration(hintText: 'Description'),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () async {
-                  await _notesRepo.addNote(
-                    Note(
-                      name: nameController.text,
-                      description: descController.text,
-                    ),
-                  );
-                  setState(() {
-                    _notes = _notesRepo.notes;
-                    Navigator.pop(context);
-                  });
-                },
-                child: const Text('Add'),
-              )
-            ],
-          );
-        },
-      );
 }
