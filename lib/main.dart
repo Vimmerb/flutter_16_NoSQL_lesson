@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_16/view/notes_page.dart';
+import 'package:flutter_16/di/config.dart';
+import 'package:flutter_16/ui/home/home_screen.dart';
 
-void main() => runApp(const MyApp());
+// void main() => runApp(const MyApp());
+void main() {
+  configureDependencies();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       //color: Colors.greenAccent,
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const NotesPage(),
+      home: const NoteScreen(),
     );
   }
 }

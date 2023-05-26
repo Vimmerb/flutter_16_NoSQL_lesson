@@ -14,29 +14,29 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import '../domain/model/note.dart';
+import 'domain/model/note.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 4472946892800616448),
+      id: const IdUid(1, 9217474883834800591),
       name: 'Note',
-      lastPropertyId: const IdUid(3, 7201427717109809748),
+      lastPropertyId: const IdUid(3, 2013842495668177396),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 6372948164968939716),
+            id: const IdUid(1, 3163476087659228447),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 2670139803201745773),
+            id: const IdUid(2, 4589778550780080938),
             name: 'name',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 7201427717109809748),
+            id: const IdUid(3, 2013842495668177396),
             name: 'description',
             type: 9,
             flags: 0)
@@ -65,7 +65,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 4472946892800616448),
+      lastEntityId: const IdUid(1, 9217474883834800591),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),

@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_16/utils/dialog_upd_utils.dart';
-import 'package:flutter_16/viewmodel/home_store.dart';
+import 'package:flutter_16/di/config.dart';
+import 'package:flutter_16/ui/home/home_store.dart';
+import 'package:flutter_16/ui/utils/dialog_upd_utils.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_16/utils/dialog_add_utils.dart';
+import 'package:flutter_16/ui/utils/dialog_add_utils.dart';
 
-class NotesPage extends StatefulWidget {
-  const NotesPage({Key? key}) : super(key: key);
+class NoteScreen extends StatefulWidget {
+  const NoteScreen({Key? key}) : super(key: key);
 
   @override
-  State<NotesPage> createState() => _NotesPageState();
+  State<NoteScreen> createState() => _NoteScreenState();
 }
 
-class _NotesPageState extends State<NotesPage> {
+class _NoteScreenState extends State<NoteScreen> {
   // late final _notesRepo = NotesRepository();
   // var _notes = <Note>[];
-  final HomeStore viewModel = HomeStore();
+  // final HomeStore viewModel = HomeStore();
+  final viewModel = getIt<HomeStore>();
 
   @override
   void initState() {
     super.initState();
     //_notesRepo.initDB().whenComplete(() => setState(() => _notes = _notesRepo.notes));
-    viewModel.fetchData();
+    viewModel.initDB();
   }
 
   @override

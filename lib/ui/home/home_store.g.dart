@@ -24,19 +24,19 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
-  late final _$fetchDataAsyncAction =
-      AsyncAction('_HomeStore.fetchData', context: context);
+  late final _$initDBAsyncAction =
+      AsyncAction('_HomeStore.initDB', context: context);
 
   @override
-  Future<void> fetchData() {
-    return _$fetchDataAsyncAction.run(() => super.fetchData());
+  Future<dynamic> initDB() {
+    return _$initDBAsyncAction.run(() => super.initDB());
   }
 
   late final _$addNoteAsyncAction =
       AsyncAction('_HomeStore.addNote', context: context);
 
   @override
-  Future<void> addNote(Note note) {
+  Future<dynamic> addNote(Note note) {
     return _$addNoteAsyncAction.run(() => super.addNote(note));
   }
 
@@ -44,7 +44,7 @@ mixin _$HomeStore on _HomeStore, Store {
       AsyncAction('_HomeStore.updateNote', context: context);
 
   @override
-  Future<void> updateNote(int id, Note note) {
+  Future<dynamic> updateNote(int id, Note note) {
     return _$updateNoteAsyncAction.run(() => super.updateNote(id, note));
   }
 
@@ -52,7 +52,7 @@ mixin _$HomeStore on _HomeStore, Store {
       AsyncAction('_HomeStore.deleteNote', context: context);
 
   @override
-  Future<void> deleteNote(int id) {
+  Future<dynamic> deleteNote(int id) {
     return _$deleteNoteAsyncAction.run(() => super.deleteNote(id));
   }
 

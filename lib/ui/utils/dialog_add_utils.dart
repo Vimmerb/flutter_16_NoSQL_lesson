@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_16/viewmodel/home_store.dart';
-import 'package:flutter_16/model/note.dart';
+import 'package:flutter_16/ui/home/home_store.dart';
+import 'package:flutter_16/domain/model/note.dart';
 
 Future showDialogAdd(BuildContext context, HomeStore viewModel) =>
     showGeneralDialog(
