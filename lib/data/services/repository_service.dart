@@ -8,6 +8,7 @@ class RepositoryService implements NotesRepositoryService {
   late final Store _store;
   late final Box<Note> _box;
 
+  @override
   List<Note> get notes => _box.getAll();
 
   @override

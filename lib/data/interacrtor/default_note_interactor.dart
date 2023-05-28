@@ -20,4 +20,7 @@ class DefaultNoteInteractor implements NoteInteractor {
   Future deleteNote(int id) => _service.deleteNote(id);
   @override
   Future updateNote(int id, Note note) => _service.updateNote(id, note);
+
+  @override
+  List<Note> get notes => _service.notes;
 }
