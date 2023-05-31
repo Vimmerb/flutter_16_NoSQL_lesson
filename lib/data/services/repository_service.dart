@@ -1,21 +1,26 @@
+import 'package:flutter_16/di/config.dart';
 import 'package:flutter_16/domain/model/note.dart';
 import 'package:flutter_16/generated/objectbox.g.dart';
 import 'package:flutter_16/domain/service/notes_repository_service.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: NotesRepositoryService)
+@LazySingleton(as: NotesRepositoryService)
 class RepositoryService implements NotesRepositoryService {
-  late final Store _store;
+  final Store _store = getIt<Store>();
   late final Box<Note> _box;
+
+  RepositoryService() {
+    _box = _store.box<Note>();
+  }
 
   @override
   List<Note> get notes => _box.getAll();
 
-  @override
-  Future initDB() async {
-    _store = await openStore();
-    _box = _store.box<Note>();
-  }
+  // @override
+  // Future initDB() async {
+  //   _store = await openStore();
+  //   _box = _store.box<Note>();
+  // }
 
   @override
   Future addNote(Note note) async {

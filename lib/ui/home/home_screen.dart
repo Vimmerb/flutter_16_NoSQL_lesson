@@ -22,7 +22,8 @@ class _NoteScreenState extends State<NoteScreen> {
   void initState() {
     super.initState();
     //_notesRepo.initDB().whenComplete(() => setState(() => _notes = _notesRepo.notes));
-    viewModel.initDB();
+    //viewModel.initDB();
+    viewModel.notes;
   }
 
   @override

@@ -24,14 +24,6 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
-  late final _$initDBAsyncAction =
-      AsyncAction('_HomeStore.initDB', context: context);
-
-  @override
-  Future<dynamic> initDB() {
-    return _$initDBAsyncAction.run(() => super.initDB());
-  }
-
   late final _$addNoteAsyncAction =
       AsyncAction('_HomeStore.addNote', context: context);
 

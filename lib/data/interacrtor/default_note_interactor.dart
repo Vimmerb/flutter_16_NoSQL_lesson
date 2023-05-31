@@ -1,7 +1,6 @@
 import 'package:flutter_16/domain/model/note.dart';
 import 'package:flutter_16/domain/interactor/note_interactor.dart';
 import 'package:flutter_16/domain/service/notes_repository_service.dart';
-import 'package:flutter_16/data/services/repository_service.dart';
 import 'package:injectable/injectable.dart';
 
 //Client
@@ -12,8 +11,8 @@ class DefaultNoteInteractor implements NoteInteractor {
 
   DefaultNoteInteractor(this._service);
 
-  @override
-  Future initDB() => _service.initDB();
+  // @override
+  // Future initDB() => _service.initDB();
   @override
   Future addNote(Note note) => _service.addNote(note);
   @override

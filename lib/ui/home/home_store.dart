@@ -1,6 +1,5 @@
 import 'package:flutter_16/domain/interactor/note_interactor.dart';
 import 'package:flutter_16/domain/model/note.dart';
-import 'package:flutter_16/data/services/repository_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 
@@ -19,11 +18,11 @@ abstract class _HomeStore with Store {
   @observable
   List<Note> notes = [];
 
-  @action
-  Future initDB() async {
-    await interactor.initDB();
-    notes = interactor.notes;
-  }
+  // @action
+  // Future initDB() async {
+  //   await interactor.initDB();
+  //   notes = interactor.notes;
+  // }
 
   @action
   Future addNote(Note note) async {

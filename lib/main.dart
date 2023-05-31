@@ -3,8 +3,9 @@ import 'package:flutter_16/di/config.dart';
 import 'package:flutter_16/ui/home/home_screen.dart';
 
 // void main() => runApp(const MyApp());
-void main() {
-  configureDependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
