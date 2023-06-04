@@ -13,7 +13,9 @@ abstract class _HomeStore with Store {
   //final _notesRepo = NotesRepositoryServ();
   // final RepositoryService _interactor = RepositoryService();
   final NoteInteractor interactor;
-  _HomeStore(this.interactor);
+  _HomeStore(this.interactor) {
+    notes = interactor.notes;
+  }
 
   @observable
   List<Note> notes = [];
